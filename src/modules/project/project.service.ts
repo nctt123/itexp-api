@@ -24,7 +24,8 @@ export class ProjectService {
         userId: userId,
         title: data.title,
         description: data.description,
-        member_join : data.member_join
+        member_join : data.member_join,
+        percent_join: data.percent_join
       })
 
       await this.projectRepository.save(project);
@@ -55,6 +56,7 @@ export class ProjectService {
       .addSelect('project.description', 'description')
       .addSelect('project.createdAt', 'createdAt')
       .addSelect('project.member_join', 'member_join')
+      .addSelect('project.percent_join', 'percent_join')
       .addSelect('project.userId', 'userId')
       .leftJoinAndSelect("project.user", "user")
       .orderBy('project.createdAt', 'DESC')
@@ -73,6 +75,7 @@ export class ProjectService {
       .addSelect('project.title', 'title')
       .addSelect('project.description', 'description')
       .addSelect('project.member_join', 'member_join')
+      .addSelect('project.percent_join', 'percent_join')
       .addSelect('project.createdAt', 'createdAt')
       .leftJoinAndSelect("project.user", "user")
       .where(`project.id = ${data.projectId}`)
